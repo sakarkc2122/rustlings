@@ -13,25 +13,35 @@ fn string(arg: String) {
 // Your task is to replace `placeholder(…)` with either `string_slice(…)`
 // or `string(…)` depending on what you think each value is.
 fn main() {
-    placeholder("blue");
+    string_slice("blue");
 
-    placeholder("red".to_string());
+    string("red".to_string());
 
-    placeholder(String::from("hi"));
+    string(String::from("hi"));
 
-    placeholder("rust is fun!".to_owned());
+    // to_owned() defined in Trait ToOwned
+    // fn to_owned(&self) -> Self::Owned
+    // Creates owned data from borrowed data, usually by cloning.
+    // I don't get it.
+    string("rust is fun!".to_owned());
 
-    placeholder("nice weather".into());
+    // Define in Blanket Implementations section of String struct in std
+    string("nice weather".into());
 
-    placeholder(format!("Interpolation {}", "Station"));
+    // format! is a concatenation
+    string(format!("Interpolation {}", "Station"));
 
     // WARNING: This is byte indexing, not character indexing.
     // Character indexing can be done using `s.chars().nth(INDEX)`.
-    placeholder(&String::from("abc")[0..1]);
+    // lol
+    // At the end it is just 'a' and with &, it is &str
+    string_slice(&String::from("abc")[0..1]);
 
-    placeholder("  hello there ".trim());
+    // I don't understand it.
+    // I see trim() in both primitive type and String struct.
+    string_slice("  hello there ".trim());
 
-    placeholder("Happy Monday!".replace("Mon", "Tues"));
+    string("Happy Monday!".replace("Mon", "Tues"));
 
-    placeholder("mY sHiFt KeY iS sTiCkY".to_lowercase());
+    string("mY sHiFt KeY iS sTiCkY".to_lowercase());
 }
