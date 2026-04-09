@@ -10,6 +10,9 @@ fn factorial(num: u64) -> u64 {
     // - additional variables
     // For an extra challenge, don't use:
     // - recursion
+
+    // https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.product
+    (1..=num).product()
 }
 
 fn main() {
