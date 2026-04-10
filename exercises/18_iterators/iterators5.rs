@@ -30,8 +30,9 @@ fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map = { "variables1": Complete, "from_str": None, … }
 
     let mut count = 0;
-    let vec: Vec<(&String, Progress)> = map.iter().collect();
-    0
+    let _:Vec<_> = map.values().map(|x| if *x == value {count+=1}).collect();
+    println!("{}",count);
+    count
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -52,6 +53,16 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // `collection` is a slice of hash maps.
     // collection = [{ "variables1": Complete, "from_str": None, … },
     //               { "variables2": Complete, … }, … ]
+    let mut count = 0;
+    let _:Vec<_> = collection.iter().map(|x|  count += count_iterator(x, value)).collect();
+    count
+
+    // There is a use of filter() and sum() which is rusty way
+    // My solution is bad because I said: “I don’t care about the vector, I just want the side effects.”
+    // I completely discarded the output of map: map = "ignore output → mutate external variable"
+    // That is against the design
+    // So, learn about std::iter::Iterator
+    // What are the methods available in this trait. They are VIP.
 }
 
 fn main() {
